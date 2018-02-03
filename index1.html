@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Maps</title>
+  <style>
+    #map-canvas{
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL7uoitSUpZv7-xNTOXVEULv5-L0xZdK4&libraries=places" type="text/javascript"></script>
+</head>
+<body>
+  <script>
+    var lat=0;
+    var long=0;
+    var lat1=0;
+    var long1=0;
+  </script>
+  <script>
+    var add=localStorage.ori;
+  var geocoder = new google.maps.Geocoder();
+  var address = add;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+  if (status == google.maps.GeocoderStatus.OK) {
+    var latitude = results[0].geometry.location.lat();
+    var longitude = results[0].geometry.location.lng();
+    lat = latitude;
+    long = longitude;
+
+  } 
+  else
+  {
+    alert("not available");
+  }
+});
+</script>
+  <script>
+  var geocoder = new google.maps.Geocoder();
+  var address = localStorage.des;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+  if (status == google.maps.GeocoderStatus.OK) {
+    var latitude = results[0].geometry.location.lat();
+    var longitude = results[0].geometry.location.lng();
+    lat1 = latitude;
+    long1 = longitude;
+  } 
+  else
+  {
+    alert("qwe");
+  }
+});
+</script>
+  <div class="col-xs-8"> <div id="map-canvas"></div></div>
+  <div class="col-xs-4"> <button id="get">Get Direction</button>
+  <script >
+    $('#get').hide();
+  </script>
+  <script>
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+    lat=parseInt(lat);
+    long=parseInt(long);
+    lat1=parseInt(lat1);
+    long1=parseInt(long1);
+    var boudha = new google.maps.LatLng(lat, long);
+    var hattisar = new google.maps.LatLng(lat1, long1);
+    var mapOption = {
+      zoom: 14,
+      center: boudha
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'),mapOption);
+    directionsDisplay.setMap(map);
+     </script>
+     <script>
+    jQuery(function(){
+        jQuery('#get').click();
+      });
+</script>
+     <script>
+    function calculateRoute(orig,desti){
+      var request = {
+        origin: orig,
+        destination: desti,
+        travelMode: 'DRIVING'
+      };
+      directionsService.route(request,function(result,status){
+        if(status == 'OK'){
+          directionsDisplay.setDirections(result);
+        }
+      });
+    }
+    document.getElementById('get').onclick= function(){
+      calculateRoute(localStorage.ori,localStorage.des);
+    };
+    
+  </script>
+</body>
+</html>

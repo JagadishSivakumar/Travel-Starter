@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Optimum Map</title>
+  	    <link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+  	    <link href="https://fonts.googleapis.com/css?family=Dhurjati" rel="stylesheet">
+  		<link rel="stylesheet" type="text/css" href="main.css">
+      	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="main.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL7uoitSUpZv7-xNTOXVEULv5-L0xZdK4&mode=driving&departure_time=now&v=3.exp"></script>
+  </head>
+  <body>
+  	<br>
+  	<button id="ar" type="button" class="btn btn-arrow-left">Go back</button>
+  	<script>
+  		$("#ar").hide();
+  	</script>
+  	<form id="distance_form">
+    <input id="origin" class="form-control input-lg" type="text" name="origin" placeholder="Origin" onkeyup="activatePlacesSearch()"/>
+    <br>
+    <input id="destination" placeholder="destination" class="form-control input-lg" type="text" name="destination"/>
+   	<br><center> <p>Within how many hours and minutes you gonna leave</p></center><br>
+	<div class="form-group row">
+	<div class="col-xs-6">
+	<input id="hour" type="number" class="form-control" value="0" placeholder="hours" ></input></div>
+	<div class="col-xs-6">
+	<center><input id="min" type="number" class="form-control" value="0" placeholder="minutes"></input></div>
+	</center>
+	</div>
+    <br><br>
+  	<center>  <input id="cal" type="submit" class="btn btn-primary" value="Calculate"/>  </center>
+	</form>
+	<div id="result">
+	</div>
+	<script>
+		$("#result").hide();
+	</script>
+	<center><button id="mac" class="btn btn-primary"> Click here to see the traffic map</button></center>
+	<script>$("#mac").hide();</script>
+	<script type="text/javascript">
+    document.getElementById("mac").onclick = function () {
+        location.href = "https://smartway.tn.gov/Traffic/?position=";
+        location.target = "blank";
+    };
+</script><br>
+	<center><a href="index1.html" target="blank"><button id="route" type="route" class="btn btn-primary"> Click here to see the route </button></a><center>
+	<script>
+		$("#route").hide();
+	</script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL7uoitSUpZv7-xNTOXVEULv5-L0xZdK4&libraries=places&callback=activatePlacesSearch&callback=activatePlacesSearchA"></script>
+
+  </body>
+ </html>
